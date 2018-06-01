@@ -8,5 +8,7 @@ int main() {
     Yashwanth.depositAmt(50000.0);
     Yashwanth.setupFD(1000.0, 22, 6, 2018);
     Yashwanth.currentBal();
+    Yashwanth.breakFD(0);
+    Yashwanth.currentBal();
     return 0;
 }

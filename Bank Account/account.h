@@ -19,6 +19,9 @@ class account {
             this->amt = amt;   
             FDS = new fixedDeposit[10];
         }
+        fixedDeposit getFD(int fdID) {
+            return this->FDS[fdID];
+        }
         void setName(string name) {
             this->name = name;
         }
@@ -75,5 +78,8 @@ class account {
             this->FDS[this->fdID] = fixedDeposit(amt, this->fdID, expireTime, time(0));
             this->fdID++;
             cout << "Fixed Deposit created - Rs. " << amt << endl; 
+        }
+        void breakFD(int fdID) {
+            this->amt += this->FDS[fdID].breakFD();
         }
 };

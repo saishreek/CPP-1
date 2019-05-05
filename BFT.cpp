@@ -1,60 +1,79 @@
 #include <iostream>
 #include <list>
+#include <vector>
+using std::vector;
 using namespace std;
 
 class Graph {
-    int v;
-    list<int> * adj;
+	struct node {
+		int num;
+		int dist;
+	};
 
-    public:
-        Graph(int v) {
-            this->v = v;
-            adj = new list<int>[v];
-        }
+	vector<struct node> nodes;
+	list<int> * adj;
+	int n;
 
-        void addEdge(int v1, int v2) {
-            adj[v1].push_back(v2);
-        }
+	public:
+		Graph(int n) {
+			adj = new list<int>[n];
+			this->n = n;
+			for (int i = 0; i < n; i++) {
+				struct node tmp = {i, 0};
+				nodes.push_back(tmp);
+			}
+		}
 
-        void BFT(int n) {
-            bool * visited = new bool[this->v];
-            for (int i = 0; i < this->v; i++) {
-                visited[i] = false;
-            }
-            list<int> q;
-            visited[n] = true;
+		void addEdge(int v1, int v2) {
+			adj[v1].push_back(v2);
+		}
 
-            q.push_back(n);
+		void bfs(int s, int d) {
+			bool * visited = new bool[this->n];
+			int dist = 0;
 
-            while (!q.empty()) {
-                n = q.front();
-                cout << n << " ";
-                q.pop_front();
+			for (int i = 0; i < this->n; i++) {
+				visited[i] = false;
+			}
 
-                list<int>::iterator i;
+			list<int> queue;
+			queue.push_back(s);
 
-                for (i = this->adj[n].begin(); i != this->adj[n].end(); ++i) {
-                    if (!visited[*i]) {
-                        visited[*i] = true;
-                        q.push_back(*i);
-                    }
-                }
-            }
-        }
+			visited[s] = true;
 
+			list<int>::iterator i;
+
+			
+			while(!queue.empty()) {
+				s = queue.front();
+				cout << s << " ";
+				queue.pop_front();
+				
+
+				for (i = adj[s].begin(); i != adj[s].end(); ++i) {
+					if (!visited[*i]) {
+						queue.push_back(*i);
+						visited[*i] = true;
+						nodes[*i].dist = nodes[s].dist + 1;
+					}
+				}
+			}
+
+			cout << endl << "Dist: " << nodes[d].dist << endl;
+		}
 };
 
 int main() {
 
-    Graph g = Graph(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
+	Graph g(4);
+	g.addEdge(0, 1);
+	g.addEdge(0, 2);
+	g.addEdge(1, 2);
+	g.addEdge(2, 0);
+	g.addEdge(2, 3);
+	g.addEdge(3, 3);
 
-    g.BFT(2);
+	g.bfs(0, 3);
 
-    return 0;
+	return 0;
 }

@@ -47,10 +47,13 @@ void selectionSort() {
 }
 
 void merge(int arr[], int low, int mid, int high) {
-    int i, j, k;
     int n1 = mid - low + 1;
     int n2 = high - mid;
+    int k, i, j;
 
+    i = j = 0;
+    k = low;
+    
     int L[n1], R[n2];
 
     for (int i = 0; i < n1; i++) {
@@ -61,30 +64,20 @@ void merge(int arr[], int low, int mid, int high) {
         R[i] = arr[mid + 1 + i];
     }
 
-    i = j = 0;
-    k = low;
-
-    while(i < n1 && j < n2) {
+    while (i < n1 && j < n2) {
         if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            i++;
+            arr[k++] = L[i++];
         } else {
-            arr[k] = R[j];
-            j++;
+            arr[k++] = R[j++];
         }
-        k++;
     }
 
-    while(i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
+    while (i < n1) {
+        arr[k++] = L[i++];
     }
 
-    while(i < n2) {
-        arr[k] = R[j];
-        j++;
-        k++;
+    while (j < n2) {
+        arr[k++] = R[j++];
     }
 }
 
@@ -93,7 +86,7 @@ void mergeSort(int arr[], int low, int high) {
         int mid = low + (high - low)/2;
         mergeSort(arr, low, mid);
         mergeSort(arr, mid+1, high);
-
+    
         merge(arr, low, mid, high);
     }
 }

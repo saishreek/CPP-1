@@ -40,6 +40,21 @@ void bubbleSort() {
     }
 }
 
+void selectionSort() {
+    int tmp, min_idx;
+    for (int i = 0; i < LEN-1; i++) {
+        min_idx = i;
+        for (int j = i; j < LEN; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        tmp = arr[i];
+        arr[i] = arr[min_idx];
+        arr[min_idx] = tmp;
+    }
+}
+
 
 int main() {
     insertionSort();

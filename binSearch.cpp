@@ -1,29 +1,31 @@
 #include <iostream>
 using namespace std;
+#define LEN 6
 
-int search(int arr[], int val, int low, int high) {
-    int mid = low + (high - low) / 2;
+void binarySearch(int * arr, int key, int low, int high) {
+    int mid = low + (high - low)/2;
 
-    while (arr[mid] != val && high > low) {
-        if (arr[mid] < val) {
+    while(arr[mid] != key && low < high) {
+        if (arr[mid] > key) {
             high = mid;
         } else {
             low = mid + 1;
         }
-
-        mid = low + (high - low) / 2;
+        mid = low + (high - low)/2;
     }
 
-    if (arr[mid] == val) {
-        return mid;
+    if (arr[mid] == key) {
+        cout << "Pos: " << mid+1 << endl;
+    } else {
+        cout << "Not Found" << endl;
     }
-    return -1;
 
 }
 
 int main() {
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int key = search(arr, 5, 0, 9);
-    cout << "Pos: " << key << endl;
+    int arr[] = {12, 23, 45, 67, 89, 90};
 
+    binarySearch(arr, 45, 0, LEN);
+
+    return 0;
 }

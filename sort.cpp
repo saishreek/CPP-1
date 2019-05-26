@@ -4,6 +4,8 @@ using namespace std;
 
 int arr[] = {4, 3, 2, 10, 12, 1, 5, 6};
 
+// Insertion Sort
+
 void insertionSort() {
     int tmp;
     for (int i = 1; i < LEN; i++) {
@@ -17,6 +19,7 @@ void insertionSort() {
     }
 }
 
+// Bubble Sort
 
 void bubbleSort() {
     int tmp;
@@ -30,6 +33,8 @@ void bubbleSort() {
         }
     }
 }
+
+// Selection Sort
 
 void selectionSort() {
     int tmp, min_idx;
@@ -45,6 +50,8 @@ void selectionSort() {
         arr[min_idx] = tmp;
     }
 }
+
+// Merge Sort
 
 void merge(int arr[], int low, int mid, int high) {
     int n1 = mid - low + 1;
@@ -90,6 +97,37 @@ void mergeSort(int arr[], int low, int high) {
         merge(arr, low, mid, high);
     }
 }
+
+// Quick Sort
+
+int partition(int arr[], int low, int high) {
+    int ind = low-1, tmp;
+    int pivot = arr[high];
+    for (int i = low; i < high; i++) {
+        if (arr[i] < pivot) {
+            ind++;
+            tmp = arr[i];
+            arr[i] = arr[ind];
+            arr[ind] = tmp;
+        }
+    }
+
+    tmp = arr[ind + 1];
+    arr[ind + 1] = arr[high];
+    arr[high] = tmp;
+
+    return (ind + 1);  
+
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
 
 
 int main() {

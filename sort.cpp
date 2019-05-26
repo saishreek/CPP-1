@@ -15,10 +15,6 @@ void insertionSort() {
             }
         }
     }
-
-    for (int i = 0; i < LEN; i++) {
-        cout << arr[i] << " ";
-    }
 }
 
 
@@ -32,11 +28,6 @@ void bubbleSort() {
                 arr[j+1] = tmp;
             }
         }
-
-        for (int k = 0; k < LEN; k++) {
-            cout << arr[k] << ", "; 
-        }
-        cout << endl;
     }
 }
 
